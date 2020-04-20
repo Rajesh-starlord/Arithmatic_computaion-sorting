@@ -32,10 +32,20 @@ read_val_from_dict () {
 }
 temp=0;
 sort_descending () {
-
-	values=`echo "${values[@]}" | sort`
-	echo "sorted in descending order:"
-	echo $values
+        for ((i=0;i<${#vales[@]};++i))
+        do
+                for ((j=i+1;j<${#vales[@]};++j))
+                do
+                        if  [ ${values[$i]} < ${values[$j]} ];
+                        then
+                                temp=${values[$i]}
+                                values[$i]=${values[$j]}
+                                values[$j]=$temp
+                        fi
+                done
+        done
+        echo "result sorted in ascending order"
+        echo ${values[@]}
 }
 
 if [[  $a =~ ^[0-9]+$ ]] && [[ $b =~ ^[0-9]+$ ]] && [[ $c =~ ^[0-9]+$ ]];
