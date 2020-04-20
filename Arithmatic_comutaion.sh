@@ -1,5 +1,5 @@
-#! /bin/bash 
-#store the data into array
+#! /bin/bash
+#store the data into array and sort descending
 
 read -p "enter no1:-" a
 read -p "enter no2:-" b
@@ -18,7 +18,7 @@ compute () {
 print_result () {
 	for data in $@
 	do
-		echo -e "$data\n"
+		echo "$data"
 	done
 }
 read_val_from_dict () {
@@ -28,10 +28,15 @@ read_val_from_dict () {
                 values[$c]=`echo $val | awk -F":" '{print $2}'`
 		c=$(($c+1))
         done
-	echo "values readed"
-	print_result ${values[@]}
+	echo "values readed and stored in an array"
 }
+temp=0;
+sort_descending () {
 
+	values=`echo "${values[@]}" | sort`
+	echo "sorted in descending order:"
+	echo $values
+}
 
 if [[  $a =~ ^[0-9]+$ ]] && [[ $b =~ ^[0-9]+$ ]] && [[ $c =~ ^[0-9]+$ ]];
 then
@@ -39,3 +44,4 @@ then
 else
 	echo "Invalid Input:enter some integers"
 fi
+sort_descending
