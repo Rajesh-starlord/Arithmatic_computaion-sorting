@@ -1,5 +1,5 @@
-#! /bin/bash
-#store the data into array and sort descending
+#! /bin/bash -x
+#store the data into array and sort descending and ascending order
 
 read -p "enter no1:-" a
 read -p "enter no2:-" b
@@ -30,12 +30,22 @@ read_val_from_dict () {
         done
 	echo "values readed and stored in an array"
 }
-temp=0;
-sort_descending () {
+sort_ascending () {
 
-	values=`echo "${values[@]}" | sort`
-	echo "sorted in descending order:"
-	echo $values
+	for ((i=0;i<${#vales[@]};++i))
+	do
+		for ((j=i+1;j<${#vales[@]};++j))
+		do
+        		if  [ ${values[$i]} > ${values[$j]} ];
+			then
+            			temp=${values[$i]}
+            			values[$i]=${values[$j]}
+            			values[$j]=$temp
+       			fi
+		done
+	done
+	echo "result sorted in ascending order"
+	echo ${values[@]}
 }
 
 if [[  $a =~ ^[0-9]+$ ]] && [[ $b =~ ^[0-9]+$ ]] && [[ $c =~ ^[0-9]+$ ]];
@@ -44,4 +54,5 @@ then
 else
 	echo "Invalid Input:enter some integers"
 fi
-sort_descending
+
+sort_ascending
