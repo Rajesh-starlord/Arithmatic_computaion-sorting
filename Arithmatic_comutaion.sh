@@ -1,5 +1,5 @@
-#! /bin/bash -x
-#computaion-4
+#! /bin/bash 
+#store the data into array
 
 read -p "enter no1:-" a
 read -p "enter no2:-" b
@@ -13,12 +13,23 @@ compute () {
 	result_dict=(result1:$result1 result2:$result2 result3:$result3 result4:$result4)
 	echo -e "results stored in a dictionary\n"
 	print_result ${result_dict[@]}
+	read_val_from_dict ${result_dict[@]}
 }
 print_result () {
 	for data in $@
 	do
 		echo -e "$data\n"
 	done
+}
+read_val_from_dict () {
+	c=0
+	for val in $@
+        do
+                values[$c]=`echo $val | awk -F":" '{print $2}'`
+		c=$(($c+1))
+        done
+	echo "values readed"
+	print_result ${values[@]}
 }
 
 
